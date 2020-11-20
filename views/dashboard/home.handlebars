@@ -1,0 +1,113 @@
+<div class="row">
+   <div class="col m9">
+      <div class="row">
+         {{#each themes}}
+         <div class="col m4">
+            <div class="card">
+               <div class="card-content">
+                  <strong class="card-title">{{theme}}</strong>
+                  <div class="theme__plate">
+                     <div style="background-color:{{primary}}"></div>
+                     <div style="background-color:{{secondary}}"></div>
+                     <div style="background-color:{{success}}"></div>
+                     <div style="background-color:{{danger}}"></div>
+                     <div style="background-color:{{warning}}"></div>
+                     <div style="background-color:{{info}}"></div>
+                  </div>
+               </div>
+               <div class="card-action">
+                  <div class="row">
+                     <div class="col s6">
+                        <a href="/themes/{{theme}}" class="btn waves-effect waves-light blue">preview</a>
+                     </div>
+                     <div class="col s6">
+                        <a href="/themes/{{theme}}/download" class="right btn waves-effect waves-light
+                        blue lighten-3">download</a>
+                     </div>
+                  </div>
+               </div>
+               <div class="card-action">
+                  <div class="row">
+                     <div class="col s6">
+                        <a class="waves-effect waves-light btn" href="/themes?themeId={{_id}}">edit</a>
+                     </div>
+                     <div class="col s6">
+                        <form method="POST" action="/themes?_method=DELETE">
+                           <input type="hidden" name="themeId" value="{{_id}}" />
+                           <button type="submit" class="right waves-effect waves-light btn" >Delete</button>
+                        </form>
+                       
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         {{/each}}
+      </div>
+   </div>
+   <div class="col m3">
+
+      <div class="card">
+         <div class="card-content">
+             <form {{#if currentTheme}} action="/themes?_method=PUT" {{else}} action="/themes" {{/if}}method="POST">
+                    {{#if currentTheme}}
+                    <input type="hidden" name="themeId" value="{{currentTheme._id}}" />
+                    {{/if}}
+               <div class="input-field">
+                  <input placeholder="Enter any theme" type="text" class="validate" 
+                  name="theme"  value="{{currentTheme.theme}}">
+                  <label>Theme name </label>
+               </div>
+
+               <div class="input-field">
+                  <input placeholder="Enter any primary color" type="text" class="validate"
+                   name="primary"  value="{{currentTheme.primary}}">
+                  <label>Primary Color</label>
+               </div>
+
+               <div class="input-field">
+                  <input placeholder="Enter any secondary color" type="text" class="validate" 
+                  name="secondary"  value="{{currentTheme.secondary}}">
+                  <label>Secondary Color</label>
+               </div>
+
+               <div class="input-field">
+                  <input placeholder="Enter any Success color" type="text" class="validate"
+                   name="success"  value="{{currentTheme.success}}">
+                  <label>Success Color</label>
+               </div>
+               <div class="input-field">
+                  <input placeholder="Enter any Danger color" type="text" class="validate" 
+                  name="danger"  value="{{currentTheme.danger}}">
+                  <label>Danger Color</label>
+               </div>
+               <div class="input-field">
+                  <input placeholder="Enter any Warning color" type="text" class="validate"
+                   name="warning"  value="{{currentTheme.warning}}">
+                  <label>Warning Color</label>
+               </div>
+               <div class="input-field">
+                  <input placeholder="Enter any Info color" type="text" class="validate"
+                   name="info"  value="{{currentTheme.info}}">
+                  <label>Info Color</label>
+               </div>
+               <div class="input-field">
+                  <input placeholder="Enter font style" type="text" class="validate"
+                   name="style"  value="{{currentTheme.style}}">
+                  <label>Font Style</label>
+               </div>
+
+                {{#if currentTheme}}
+                    <button class="waves-effect waves-light btn orange">Update Theme</button>
+                    <a href="/themes" class="waves-effect waves-light btn black">cancel</a>
+
+                    {{else}}
+                    <button class="waves-effect waves-light btn">Create Theme</button>
+                    {{/if}}
+
+            </form>
+         </div>
+      </div>
+
+   </div>
+</div>
